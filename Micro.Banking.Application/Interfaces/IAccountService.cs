@@ -1,8 +1,6 @@
-﻿using Micro.Banking.Domain.Models;
-using System;
+﻿using Micro.Banking.Application.Models;
+using Micro.Banking.Domain.Models;
 using System.Collections.Generic;
-using System.Text;
-using Micro.Banking.Application.Models;
 
 namespace Micro.Banking.Application.Interfaces
 {

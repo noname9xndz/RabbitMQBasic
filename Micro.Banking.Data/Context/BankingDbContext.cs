@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Micro.Banking.Domain.Models;
+﻿using Micro.Banking.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Micro.Banking.Data.Context
@@ -10,7 +7,6 @@ namespace Micro.Banking.Data.Context
     {
         public BankingDbContext(DbContextOptions options) : base(options)
         {
-            
         }
 
         public DbSet<Account> Accounts { set; get; }

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Micro.Banking.Domain.Commands
+﻿namespace Micro.Banking.Domain.Commands
 {
     public class CreateTransferCommand : TransferCommand
     {
-        public CreateTransferCommand(int from,int to,decimal amount)
+        public CreateTransferCommand(int from, int to, decimal amount)
         {
             From = from;
             To = to;

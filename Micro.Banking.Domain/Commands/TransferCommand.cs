@@ -1,11 +1,8 @@
 ﻿using Micro.Domain.Core.Commands;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Micro.Banking.Domain.Commands
 {
-    public  abstract class TransferCommand : Command
+    public abstract class TransferCommand : Command
     {
         public int From { get; protected set; }
 

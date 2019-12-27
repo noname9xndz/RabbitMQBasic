@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Micro.Domain.Core.Events;
+﻿using Micro.Domain.Core.Events;
 
 namespace Micro.Banking.Domain.Events
 {
@@ -11,12 +8,11 @@ namespace Micro.Banking.Domain.Events
         public int To { get; private set; }
         public decimal Amount { get; private set; }
 
-        public TransferCreatedEvent(int from,int to, decimal amount)
+        public TransferCreatedEvent(int from, int to, decimal amount)
         {
             From = from;
             To = to;
             Amount = amount;
         }
-
     }
 }

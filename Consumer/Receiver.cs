@@ -1,7 +1,7 @@
-﻿using System;
-using System.Text;
-using RabbitMQ.Client;
+﻿using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using System;
+using System.Text;
 
 namespace Consumer
 {
@@ -28,7 +28,6 @@ namespace Consumer
                 Console.WriteLine("Press [Enter] to exit ...");
                 Console.ReadLine();
             }
-            
         }
     }
 }

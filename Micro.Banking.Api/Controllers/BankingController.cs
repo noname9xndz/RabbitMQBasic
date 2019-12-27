@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Micro.Banking.Application.Interfaces;
+﻿using Micro.Banking.Application.Interfaces;
 using Micro.Banking.Application.Models;
 using Micro.Banking.Domain.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace Micro.Banking.Api.Controllers
 {
@@ -33,6 +29,5 @@ namespace Micro.Banking.Api.Controllers
             _accountService.Transfer(accountTransfer);
             return Ok(accountTransfer);
         }
-
     }
 }

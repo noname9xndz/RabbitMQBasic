@@ -1,15 +1,15 @@
-﻿using Micro.Domain.Core.Bus;
+﻿using MediatR;
+using Micro.Domain.Core.Bus;
 using Micro.Domain.Core.Commands;
 using Micro.Domain.Core.Events;
+using Newtonsoft.Json;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MediatR;
-using Newtonsoft.Json;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
 
 namespace Micro.Infra.Bus
 {
@@ -33,7 +33,7 @@ namespace Micro.Infra.Bus
 
         public void Pushlish<T>(T @event) where T : Event
         {
-            var factory = new ConnectionFactory() { HostName = "localhost"} ;
+            var factory = new ConnectionFactory() { HostName = "localhost" };
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
@@ -43,7 +43,7 @@ namespace Micro.Infra.Bus
                 var message = JsonConvert.SerializeObject(@event);
                 var body = Encoding.UTF8.GetBytes(message);
 
-                channel.BasicPublish("",eventName,null,body);
+                channel.BasicPublish("", eventName, null, body);
             }
         }
 
@@ -61,27 +61,25 @@ namespace Micro.Infra.Bus
 
             if (!_handlers.ContainsKey(eventName))
             {
-                _handlers.Add(eventName,new List<Type>());
+                _handlers.Add(eventName, new List<Type>());
             }
 
-            if (_handlers[eventName].Any(x=>x.GetType() == handlerType))
+            if (_handlers[eventName].Any(x => x.GetType() == handlerType))
             {
                 throw new ArgumentException(
-                    $"Handler Type {handlerType.Name} already is registered for '{eventName}' ",nameof(handlerType));
+                    $"Handler Type {handlerType.Name} already is registered for '{eventName}' ", nameof(handlerType));
             }
 
             _handlers[eventName].Add(handlerType);
 
             StartBasicConsume<T>();
-
         }
 
         private void StartBasicConsume<T>() where T : Event
         {
-            var factory = new ConnectionFactory() { HostName = "localhost",DispatchConsumersAsync = true};
+            var factory = new ConnectionFactory() { HostName = "localhost", DispatchConsumersAsync = true };
             var connection = factory.CreateConnection();
             var channel = connection.CreateModel();
-
 
             var eventName = typeof(T).Name;
             channel.QueueDeclare(eventName, false, false, false, null);
@@ -99,7 +97,6 @@ namespace Micro.Infra.Bus
             try
             {
                 await ProcessEvent(eventName, message).ConfigureAwait(false);
-
             }
             catch (Exception ex)
             {
@@ -115,14 +112,14 @@ namespace Micro.Infra.Bus
                 foreach (var item in subscriptions)
                 {
                     var handler = Activator.CreateInstance(item);
-                    if(handler == null) continue;
+                    if (handler == null) continue;
                     var eventType = _evenTypes.SingleOrDefault(x => x.Name == eventName);
 
                     var @event = JsonConvert.DeserializeObject(message, eventType);
                     var conreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
 
-                    await (Task) conreteType.GetMethod("Handle")
-                        .Invoke(handler, new object[] {  @event  });
+                    await (Task)conreteType.GetMethod("Handle")
+                        .Invoke(handler, new object[] { @event });
                 }
             }
         }

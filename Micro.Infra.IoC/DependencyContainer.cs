@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MediatR;
+﻿using MediatR;
 using Micro.Banking.Application.Interfaces;
 using Micro.Banking.Application.Services;
 using Micro.Banking.Data.Context;
@@ -23,7 +20,7 @@ namespace Micro.Infra.IoC
             services.AddTransient<IEventBus, RabbitMQBus>();
 
             //Domain Banking Commands
-            services.AddTransient<IRequestHandler<CreateTransferCommand,bool>, TransferCommandHandler>();
+            services.AddTransient<IRequestHandler<CreateTransferCommand, bool>, TransferCommandHandler>();
 
             // Service
             services.AddTransient<IAccountService, AccountService>();
