@@ -1,8 +1,16 @@
+using MediatR;
+using Micro.Domain.Core.Bus;
+using Micro.Infra.IoC;
+using Micro.Transfer.Data.Context;
+using Micro.Transfer.Domain.EventHandlers;
+using Micro.Transfer.Domain.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace Micro.Transfer.Api
 {
@@ -18,7 +26,21 @@ namespace Micro.Transfer.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<TransferDbContext>(
+                options =>
+                {
+                    options.UseSqlServer(Configuration.GetConnectionString("TransferDbConnection"));
+                });
+
             services.AddControllers();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Transfer Microservice", Version = "v1" });
+            });
+            services.AddMediatR(typeof(Startup));
+
+            RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -31,6 +53,12 @@ namespace Micro.Transfer.Api
 
             app.UseHttpsRedirection();
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Transfer Microservice v1");
+            });
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -39,6 +67,19 @@ namespace Micro.Transfer.Api
             {
                 endpoints.MapControllers();
             });
+
+            ConfigurationEventBus(app);
+        }
+
+        private void ConfigurationEventBus(IApplicationBuilder app)
+        {
+            var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
+            eventBus.Subscribe<TransferCreatedEvent,TransferEventHandler>();
+        }
+
+        private void RegisterServices(IServiceCollection services)
+        {
+            DependencyContainer.RegisterServices(services);
         }
     }
 }
