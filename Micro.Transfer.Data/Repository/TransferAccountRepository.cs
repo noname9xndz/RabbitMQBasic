@@ -1,22 +1,29 @@
 ﻿using Micro.Transfer.Data.Context;
 using Micro.Transfer.Domain.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Micro.Transfer.Domain.Interfaces;
 
 namespace Micro.Transfer.Data.Repository
 {
     public class TransferAccountRepository : ITransferAccountRepository
     {
-        private readonly TransferDbContext _bankingDbContext;
+        private readonly TransferDbContext _transferDbContextDbContext;
 
-        public TransferAccountRepository(TransferDbContext bankingDbContext)
+        public TransferAccountRepository(TransferDbContext transferDbContextDbContext)
         {
-            _bankingDbContext = bankingDbContext;
+            _transferDbContextDbContext = transferDbContextDbContext;
         }
 
         public IEnumerable<AccountTransferLog> GetAllAccountsTransferLog()
         {
-            return _bankingDbContext.AccountTransferLog;
+            return _transferDbContextDbContext.AccountTransferLog;
+        }
+
+        public void AddAccountsTransferLog(AccountTransferLog accountTransferLog)
+        {
+           _transferDbContextDbContext.AccountTransferLog.Add(accountTransferLog);
+            _transferDbContextDbContext.SaveChanges();
         }
     }
 }
