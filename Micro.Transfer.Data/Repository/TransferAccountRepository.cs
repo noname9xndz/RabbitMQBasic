@@ -20,10 +20,10 @@ namespace Micro.Transfer.Data.Repository
             return _transferDbContextDbContext.AccountTransferLog;
         }
 
-        public void AddAccountsTransferLog(AccountTransferLog accountTransferLog)
+        public async Task AddAccountsTransferLog(AccountTransferLog accountTransferLog)
         {
-           _transferDbContextDbContext.AccountTransferLog.Add(accountTransferLog);
-            _transferDbContextDbContext.SaveChanges();
+            await _transferDbContextDbContext.AccountTransferLog.AddAsync(accountTransferLog);
+            await _transferDbContextDbContext.SaveChangesAsync();
         }
     }
 }

@@ -6,5 +6,6 @@ namespace Micro.Banking.Domain.Interfaces
     public interface IAccountRepository
     {
         IEnumerable<Account> GetAllAccounts();
+        //void AddAco
     }
 }

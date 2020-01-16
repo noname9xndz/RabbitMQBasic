@@ -16,16 +16,16 @@ namespace Micro.Transfer.Domain.EventHandlers
         {
             _transferAccountRepository = transferAccountRepository;
         }
-        public Task Handle(TransferCreatedEvent @event)
+        public async Task Handle(TransferCreatedEvent @event)
         {
-            _transferAccountRepository.AddAccountsTransferLog(new AccountTransferLog()
+            await _transferAccountRepository.AddAccountsTransferLog(new AccountTransferLog()
             {
                 FromAccount = @event.From,
                 ToAccount = @event.To,
                 TransferAmount = @event.Amount
 
             });
-            return Task.CompletedTask;
+            //return Task.CompletedTask;
         }
     }
 }

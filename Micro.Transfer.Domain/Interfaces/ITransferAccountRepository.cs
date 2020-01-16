@@ -8,6 +8,6 @@ namespace Micro.Transfer.Domain.Interfaces
     {
         IEnumerable<AccountTransferLog> GetAllAccountsTransferLog();
 
-        void AddAccountsTransferLog(AccountTransferLog accountTransferLog);
+        Task AddAccountsTransferLog(AccountTransferLog accountTransferLog);
     }
 }
