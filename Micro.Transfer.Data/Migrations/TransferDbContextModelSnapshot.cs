@@ -14,7 +14,7 @@ namespace Micro.Transfer.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.0")
+                .HasAnnotation("ProductVersion", "3.1.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -27,6 +27,12 @@ namespace Micro.Transfer.Data.Migrations
 
                     b.Property<string>("FromAccount")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PaymentStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PaymentType")
+                        .HasColumnType("int");
 
                     b.Property<string>("ToAccount")
                         .HasColumnType("nvarchar(max)");

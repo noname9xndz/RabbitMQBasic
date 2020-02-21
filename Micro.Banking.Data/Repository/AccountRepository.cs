@@ -18,7 +18,5 @@ namespace Micro.Banking.Data.Repository
         {
             return _bankingDbContext.Accounts;
         }
-
-
     }
 }

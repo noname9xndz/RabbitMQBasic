@@ -1,4 +1,5 @@
-﻿using Micro.Domain.Core.Commands;
+﻿using Micro.Common;
+using Micro.Domain.Core.Commands;
 
 namespace Micro.Banking.Domain.Commands
 {
@@ -9,5 +10,8 @@ namespace Micro.Banking.Domain.Commands
         public int To { get; protected set; }
 
         public decimal Amount { get; protected set; }
+
+        public PaymentType PaymentType { get; protected set; }
+        public PaymentStatus PaymentStatus { get; protected set; }
     }
 }

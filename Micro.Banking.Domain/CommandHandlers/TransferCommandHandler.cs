@@ -19,7 +19,7 @@ namespace Micro.Banking.Domain.CommandHandlers
         public Task<bool> Handle(CreateTransferCommand request, CancellationToken cancellationToken)
         {
             //publish event to rabbitmq
-            _eventBus.Pushlish(new TransferCreatedEvent(request.From, request.To, request.Amount));
+            _eventBus.Pushlish(new TransferCreatedEvent(request.From, request.To, request.Amount, request.PaymentType, request.PaymentStatus));
 
             return Task.FromResult(true);
         }

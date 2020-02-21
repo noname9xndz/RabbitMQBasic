@@ -1,13 +1,18 @@
-﻿
-using System.Collections.Generic;
+﻿using Micro.Common;
 using Micro.Transfer.Domain.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Micro.Transfer.Application.Interfaces
 {
     public interface ITransferAccountService
     {
-        IEnumerable<AccountTransferLog> GetAllAccountsTransferLog();
+        Task<List<AccountTransferLog>> GetAllAccountsTransferLog();
 
-       // void Transfer(AccountTransfer accountTransfer);
+        Task<List<AccountTransferLog>> GetAllAccountsTransferLogByStatus(PaymentStatus paymentStatus);
+
+        Task<bool> UpdateMultiAccountsTransferLog(List<AccountTransferLog> listTransferLogs);
+
+        // void Transfer(AccountTransfer accountTransfer);
     }
 }

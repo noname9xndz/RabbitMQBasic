@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Micro.Common;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Micro.Transfer.Domain.Models
 {
@@ -15,5 +13,8 @@ namespace Micro.Transfer.Domain.Models
 
         [Column(TypeName = "decimal(18, 2)")]
         public decimal TransferAmount { set; get; }
+
+        public PaymentType? PaymentType { set; get; }
+        public PaymentStatus? PaymentStatus { set; get; }
     }
 }

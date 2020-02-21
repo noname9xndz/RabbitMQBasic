@@ -1,8 +1,9 @@
-﻿using Micro.Banking.Application.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using Micro.Common;
 using Micro.Transfer.Application.Interfaces;
 using Micro.Transfer.Domain.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Micro.Transfer.Api.Controllers
 {
@@ -18,16 +19,30 @@ namespace Micro.Transfer.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<AccountTransferLog>> GetAllAccount()
+        public async Task<ApiResponse<List<AccountTransferLog>>> GetAllAccount()
         {
-            return Ok(_transferAccountService.GetAllAccountsTransferLog());
+            ApiResponse<List<AccountTransferLog>> response = new ApiResponse<List<AccountTransferLog>>();
+            response.Result = await _transferAccountService.GetAllAccountsTransferLog();
+            response.Successful = true;
+            return response;
         }
 
-//        [HttpPost]
-//        public IActionResult Post([FromBody]AccountTransfer accountTransfer)
-//        {
-//            _accountService.Transfer(accountTransfer);
-//            return Ok(accountTransfer);
-//        }
+        [HttpGet("{paymentStatus}")]
+        public async Task<ApiResponse<List<AccountTransferLog>>> GetAllByStatus(PaymentStatus paymentStatus)
+        {
+            ApiResponse<List<AccountTransferLog>> response = new ApiResponse<List<AccountTransferLog>>();
+            response.Result = await _transferAccountService.GetAllAccountsTransferLogByStatus(paymentStatus);
+            response.Successful = true;
+            return response;
+        }
+
+        [HttpPut]
+        public async Task<ApiResponse<bool>> UpdateMultilTranfer([FromBody]List<AccountTransferLog> listTransferLogs)
+        {
+            ApiResponse<bool> response = new ApiResponse<bool>();
+            response.Result = await _transferAccountService.UpdateMultiAccountsTransferLog(listTransferLogs);
+            response.Successful = true;
+            return response;
+        }
     }
 }

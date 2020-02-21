@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Micro.Common\Micro.Common.csproj" />
     <ProjectReference Include="..\Micro.Domain.Core\Micro.Domain.Core.csproj" />
   </ItemGroup>
 

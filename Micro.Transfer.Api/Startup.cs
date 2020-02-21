@@ -74,7 +74,8 @@ namespace Micro.Transfer.Api
         private void ConfigurationEventBus(IApplicationBuilder app)
         {
             var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
-            eventBus.Subscribe<TransferCreatedEvent,TransferEventHandler>();
+            eventBus.Subscribe<TransferCreatedEvent, TransferEventHandler>();
+            //eventBus.Subscribe<GetAllTransferByStatusEvent,GetAllTransferByStatusEventHandler>();
         }
 
         private void RegisterServices(IServiceCollection services)

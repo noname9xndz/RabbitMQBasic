@@ -27,22 +27,23 @@ namespace Micro.Infra.IoC
             services.AddSingleton<IEventBus, RabbitMQBus>(sp =>
             {
                 var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
-                return  new RabbitMQBus(sp.GetService<IMediator>(),scopeFactory);
+                return new RabbitMQBus(sp.GetService<IMediator>(), scopeFactory);
             });
 
             //Subscriptions
             services.AddTransient<TransferEventHandler>();
-
 
             //Domain Event
             services.AddTransient<IEventHandler<TransferCreatedEvent>, TransferEventHandler>();
 
             //Domain Banking Commands
             services.AddTransient<IRequestHandler<CreateTransferCommand, bool>, TransferCommandHandler>();
+            //  services.AddTransient<IRequestHandler<GetAllTransferByStatusCommand, TransferListViewModel>, GetAllByStatusTransferCommandHandler>();
 
             // Service
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<ITransferAccountService, TransferAccountService>();
+            // services.AddTransient<IJobService, JobService>();
 
             // Repository
             services.AddTransient<IAccountRepository, AccountRepository>();

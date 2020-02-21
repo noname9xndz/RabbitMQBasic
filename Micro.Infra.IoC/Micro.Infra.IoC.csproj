@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -13,6 +13,8 @@
     <ProjectReference Include="..\Micro.Banking.Data\Micro.Banking.Data.csproj" />
     <ProjectReference Include="..\Micro.Domain.Core\Micro.Domain.Core.csproj" />
     <ProjectReference Include="..\Micro.Infra.Bus\Micro.Infra.Bus.csproj" />
+    <ProjectReference Include="..\Micro.Job.Application\Micro.Job.Application.csproj" />
+    <ProjectReference Include="..\Micro.Job.Domain\Micro.Job.Domain.csproj" />
     <ProjectReference Include="..\Micro.Transfer.Application\Micro.Transfer.Application.csproj" />
     <ProjectReference Include="..\Micro.Transfer.Data\Micro.Transfer.Data.csproj" />
   </ItemGroup>

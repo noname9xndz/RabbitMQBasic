@@ -11,4 +11,15 @@ namespace Micro.Domain.Core.Bus
     public interface IEventHandler
     {
     }
+
+    public interface IEventHandlerResult<in TEvent, TResponse> where TEvent : Event
+    {
+        Task<TResponse> Handle(TEvent @event);
+    }
+
+    //    public interface <in TEvent,out TResult> : IEventHandler where TEvent : Event
+    //    {
+    //        Task<T> Handle(TEvent @event) where T : class;
+    //
+    //    }
 }

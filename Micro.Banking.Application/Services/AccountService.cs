@@ -27,7 +27,7 @@ namespace Micro.Banking.Application.Services
         public void Transfer(AccountTransfer accountTransfer)
         {
             var createTranferCommand = new CreateTransferCommand(accountTransfer.FromAccount, accountTransfer.ToAccount,
-                accountTransfer.TransferAmount);
+                accountTransfer.TransferAmount, accountTransfer.PaymentType, accountTransfer.PaymentStatus);
             _eventBus.SendCommand(createTranferCommand);
         }
     }

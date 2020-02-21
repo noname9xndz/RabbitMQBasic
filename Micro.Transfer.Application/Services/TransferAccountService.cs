@@ -1,8 +1,11 @@
-﻿using Micro.Transfer.Application.Interfaces;
+﻿using Micro.Common;
+using Micro.Domain.Core.Bus;
+using Micro.Transfer.Application.Interfaces;
 using Micro.Transfer.Domain.Interfaces;
 using Micro.Transfer.Domain.Models;
+using System;
 using System.Collections.Generic;
-using Micro.Domain.Core.Bus;
+using System.Threading.Tasks;
 
 namespace Micro.Transfer.Application.Services
 {
@@ -17,10 +20,30 @@ namespace Micro.Transfer.Application.Services
             _eventBus = eventBus;
         }
 
-        public IEnumerable<AccountTransferLog> GetAllAccountsTransferLog()
+        public async Task<List<AccountTransferLog>> GetAllAccountsTransferLog()
         {
-            return _transferAccountRepository.GetAllAccountsTransferLog();
+            return await _transferAccountRepository.GetAllAccountsTransferLog();
         }
 
+        public async Task<List<AccountTransferLog>> GetAllAccountsTransferLogByStatus(PaymentStatus paymentStatus)
+        {
+            return await _transferAccountRepository.GetAllAccountsTransferLogByStatus(paymentStatus);
+        }
+
+        public async Task<bool> UpdateMultiAccountsTransferLog(List<AccountTransferLog> listTransferLogs)
+        {
+            bool flag = false;
+            try
+            {
+                await _transferAccountRepository.UpdateMultiAccountsTransferLog(listTransferLogs);
+                flag = true;
+            }
+            catch (Exception e)
+            {
+                flag = false;
+            }
+
+            return flag;
+        }
     }
 }

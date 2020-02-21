@@ -2,6 +2,7 @@
 using Micro.Domain.Core.Bus;
 using Micro.Domain.Core.Commands;
 using Micro.Domain.Core.Events;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -10,7 +11,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Micro.Infra.Bus
 {
@@ -116,7 +116,7 @@ namespace Micro.Infra.Bus
                     var subscriptions = _handlers[eventName];
                     foreach (var subscrip in subscriptions)
                     {
-                       // var handler = Activator.CreateInstance(item);
+                        // var handler = Activator.CreateInstance(item);
                         var handler = scope.ServiceProvider.GetService(subscrip);
                         if (handler == null) continue;
                         var eventType = _evenTypes.SingleOrDefault(x => x.Name == eventName);
@@ -128,7 +128,6 @@ namespace Micro.Infra.Bus
                             .Invoke(handler, new object[] { @event });
                     }
                 }
-                
             }
         }
     }
