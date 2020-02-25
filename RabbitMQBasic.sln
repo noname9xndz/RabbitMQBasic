@@ -71,8 +71,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Micro.Job.Data", "Micro.Job
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Micro.Job.Domain", "Micro.Job.Domain\Micro.Job.Domain.csproj", "{9377D9EE-CAE5-4A37-ABA3-6AA07EB77D6E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Micro.Job.TestApi", "Micro.Job.TestApi\Micro.Job.TestApi.csproj", "{36334427-681B-4426-82E0-87704208790E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -167,10 +165,6 @@ Global
 		{9377D9EE-CAE5-4A37-ABA3-6AA07EB77D6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9377D9EE-CAE5-4A37-ABA3-6AA07EB77D6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9377D9EE-CAE5-4A37-ABA3-6AA07EB77D6E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{36334427-681B-4426-82E0-87704208790E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{36334427-681B-4426-82E0-87704208790E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{36334427-681B-4426-82E0-87704208790E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{36334427-681B-4426-82E0-87704208790E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -208,7 +202,6 @@ Global
 		{F709CA40-F923-4D32-9F3E-12D413325D00} = {8065D41B-1F87-4C06-B088-DE379F6BC992}
 		{F7CF8749-D889-4694-9C85-1AECB79CA9FA} = {8065D41B-1F87-4C06-B088-DE379F6BC992}
 		{9377D9EE-CAE5-4A37-ABA3-6AA07EB77D6E} = {8065D41B-1F87-4C06-B088-DE379F6BC992}
-		{36334427-681B-4426-82E0-87704208790E} = {8065D41B-1F87-4C06-B088-DE379F6BC992}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {54950A85-9220-4A0D-B858-55BE4E776A15}
