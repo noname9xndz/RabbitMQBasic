@@ -13,7 +13,7 @@ namespace Producer
             using (var channel = connection.CreateModel())
             {
                 channel.QueueDeclare("TestMessage", false, false, false, null);
-                string message = "hello world =))))))";
+                string message = "sender hello world =))))))";
                 var body = Encoding.UTF8.GetBytes(message);
 
                 channel.BasicPublish("", "TestMessage", null, body);

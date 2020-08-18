@@ -21,7 +21,7 @@ namespace Consumer
                     var body = bodyResponse.Body;
                     var message = Encoding.UTF8.GetString(body);
 
-                    Console.WriteLine("send message {0} ...", message);
+                    Console.WriteLine("send message : {0} ...", message);
                 };
                 channel.BasicConsume("TestMessage", true, consumer);
 
